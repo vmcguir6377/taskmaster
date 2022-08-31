@@ -1,5 +1,8 @@
 var taskIdCounter = 0;
 
+
+//hamburger menu
+
 var formEl = document.querySelector("#task-form");
 var tasksToDoEl = document.querySelector("#tasks-to-do");
 var tasksInProgressEl = document.querySelector("#tasks-in-progress");
@@ -10,9 +13,9 @@ var taskFormHandler = function(event) {
   event.preventDefault();
   var taskNameInput = document.querySelector("input[name='task-name']").value;
   var taskTypeInput = document.querySelector("select[name='task-type']").value;
-
+  var userInput = document.querySelector("select[name='user']").value;
   // check if inputs are empty (validate)
-  if (taskNameInput === "" || taskTypeInput === "") {
+  if (taskNameInput === "" || taskTypeInput === "" || userInput === "") {
     alert("You need to fill out the task form!");
     return false;
   }
@@ -20,17 +23,19 @@ var taskFormHandler = function(event) {
   // reset form fields for next task to be entered
   document.querySelector("input[name='task-name']").value = "";
   document.querySelector("select[name='task-type']").selectedIndex = 0;
+  document.querySelector("select[name='user']").selectorIndex = 0;
 
   // check if task is new or one being edited by seeing if it has a data-task-id attribute
   var isEdit = formEl.hasAttribute("data-task-id");
 
   if (isEdit) {
     var taskId = formEl.getAttribute("data-task-id");
-    completeEditTask(taskNameInput, taskTypeInput, taskId);
+    completeEditTask(taskNameInput, taskTypeInput, userInput, taskId);
   } else {
     var taskDataObj = {
       name: taskNameInput,
-      type: taskTypeInput
+      type: taskTypeInput,
+      user: userInput
     };
 
     createTaskEl(taskDataObj);
@@ -44,7 +49,7 @@ var createTaskEl = function(taskDataObj) {
 
   var taskInfoEl = document.createElement("div");
   taskInfoEl.className = "task-info";
-  taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskDataObj.name + "</h3><span class='task-type'>" + taskDataObj.type + "</span>";
+  taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskDataObj.name  + "</h3><span class='task-type'>" + taskDataObj.type + "</h3><span class='user'>" + 'Assigned to:' + taskDataObj.user +  "</span>";
   listItemEl.appendChild(taskInfoEl);
 
   // create task actions (buttons and select) for task

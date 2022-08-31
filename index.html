@@ -24,17 +24,26 @@
             <div class="form-group">
                 <select name="task-type" class="select-dropdown">
                     <option value="" disabled selected>Pick a task type</option>
-                    <option value="Print">Print</option>
-                    <option value="Web">Web</option>
-                    <option value="Mobile">Mobile</option>
+                    <option value="Mundane">Mundane</option>
+                    <option value="Yucky">Yucky</option>
+                    <option value="Satisfying">Satisfying</option>
                 </select>
             </div>
+            <div class="form-group">
+                <select name="user" class="select-dropdown">
+                    <option value="" disabled selected>Send to User</option>
+                    <option value="Patriarch">Assigned to: Patriarch</option>
+                    <option value="Matriarch">Assigned to: Matriarch</option>
+                    <option value="Gelfling">Assigned to: Gelfling</option>
+                    <option value="Plankton">Assigned to: Plankton</option>
+                </select>
+            </div>
+    
             <div class="form-group">
                 <button class="btn" id="save-task" type="submit">Add Task</button>
             </div>
         </form>
-
-
+       
     </header>
 
     <main class="page-content" id="page-content">
